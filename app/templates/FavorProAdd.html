@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top:20px">
+        <div>
+            <form class="row gx-3 gy-2 align-items-center" method="post">
+                {% csrf_token %}
+                <div class="col-sm-3">
+                    <label class="visually-hidden" for="specificSizeInputName">Title</label>
+                    <div class="input-group">
+                        <div class="input-group-text">Title</div>
+                        {{ form.title }}
+                    </div>
+                </div>
+                <div style="margin-top:20px">
+                    <label class="visually-hidden" for="specificSizeInputGroupUsername">Link</label>
+                    <div class="input-group">
+                        <div class="input-group-text">Link</div>
+                        {{ form.link }}
+                    </div>
+                </div>
+                <div class="col-sm-3" style="margin-top: 20px">
+                    <label class="visually-hidden" for="specificSizeSelect">Category</label>
+                    {{ form.category }}
+                </div>
+                <div class="input-group" style="margin-top:20px">
+                    <span class="input-group-text">Description</span>
+                    {{ form.description }}
+                </div>
+                <div class="col-auto" style="margin-top: 20px">
+                    <button type="submit" class="btn btn-primary" id="liveToastBtn">Save</button>
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <img src="..." class="rounded me-2" alt="...">
+                                <strong class="me-auto">Hint</strong>
+                                <small>Just now</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                You have added a problem!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}

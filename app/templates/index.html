@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row" style="margin-top:30px">
+            <div class="accordion col-sm" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                aria-controls="panelsStayOpen-collapseOne">
+                            Codeforces Contest List
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                         aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">start_time</th>
+                                    <th scope="col">length</th>
+                                    <th scope="col">link</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in cf_queryset %}
+                                    <tr>
+                                        <th scope="row">{{ item.contest_id }}</th>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.start_time }}</td>
+                                        <td>{{ item.length }}</td>
+                                        <td>
+                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join now!</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseTwo">
+                            Atcoder Contest List
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                         aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body"><table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">start_time</th>
+                                    <th scope="col">link</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in atc_queryset %}
+                                    <tr>
+                                        <th scope="row">{{ item.contest_id }}</th>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.start_time }}</td>
+                                        <td>
+                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join now!</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-3">
+                <div class="card border-secondary mb-3" style="max-width: 18rem">
+                    <div class="card-header">CodeForces Contest</div>
+                    <div class="card-body" style="">
+                        <h6 class="card-title" style="">Name</h6>
+                        <div class="card-subtitle mb-2 text-muted">{{ cf_queryset.first.name }}</div>
+                        <h6 class="card-title" style="text-align: left; margin-top: 10px">Start</h6>
+                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.start_time}}</div>
+                        <h6 class="card-title" style="text-align: left; margin-top: 10px">Length</h6>
+                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.length }}</div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <a href="{{ cf_queryset.first.url }}" class="card-link">Register now »</a>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-3" style="max-width: 18rem">
+                    <div class="card-header">Atcoder Contest</div>
+                    <div class="card-body" style="">
+                        <h6 class="card-title" style="">Name</h6>
+                        <div class="card-subtitle mb-2 text-muted">{{ atc_queryset.first.name }}</div>
+                        <h6 class="card-title" style="text-align: left; margin-top: 10px">Start</h6>
+                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ atc_queryset.first.start_time}}</div>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">
+                        <a href="{{ atc_queryset.first.url }}" class="card-link">Register now »</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

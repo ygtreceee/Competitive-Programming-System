@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+    <div class="container" style="margin-top:20px">
+        <div class="row">
+            <div class="col-sm-3">
+                <a type="button" class="btn btn-primary" href="/ProblemManagement/add">Add</a>
+            </div>
+
+            <div class="col-sm-3 offset-sm-6">
+                <form class="d-flex" role="search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ search_value }}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="card" style="margin-top:20px">
+            <div class="card-header">
+                Problem-list
+            </div>
+            <div class="card-body">
+                <div class="bd-example">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Link</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in queryset %}
+                            <tr>
+{#                                <th>{{ forloop.counter }}</th>#}
+                                <th>{{ item.id }}</th>
+                                <td>{{ item.title }}</td>
+                                <td>
+                                    <a href="{{ item.link }}">{{ item.link }}</a>
+                                </td>
+                                <td>{{ item.category.name }}</td>
+                                <td>
+                                    <a class="btn btn-outline-primary btn-sm"
+                                       href="/ProblemManagement/{{ item.id }}/edit">Edit</a>
+                                    <a class="btn btn-outline-danger btn-sm"
+                                       href="/ProblemManagement/{{ item.id }}/delete">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+{#                        {{ page_string }}#}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+            <nav aria-label="Page navigation example" style="margin-left: 20px">
+                <ul class="pagination justify-content-end" style="margin-right: 30px">
+{#                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>#}
+{#                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>#}
+{#                    <li class="page-item"><a class="page-link" href="?page=2">2</a></li>#}
+{#                    <li class="page-item"><a class="page-link" href="?page=3">3</a></li>#}
+{#                    <li class="page-item"><a class="page-link" href="#">Next</a></li>#}
+                    {{ page_index_string }}
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+        if (toastTrigger) {
+            toastTrigger.addEventListener('click', () => {
+                const toast = new bootstrap.Toast(toastLiveExample)
+
+                toast.show()
+            })
+        }
+
+    </script>
+
+{% endblock %}

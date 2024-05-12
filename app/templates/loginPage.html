@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+
+    <style>
+        .login-box {
+            width: 450px;
+            border: 1px solid #dddddd;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px;
+            padding: 50px 50px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 10px #aaa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-box .content {
+            flex-grow: 1;
+            overflow: auto;
+        }
+
+        .login-box h4 {
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="login-box">
+        <h4>User Login</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3" style="margin-top: 20px">
+                <label for="formGroupExampleInput" class="form-label">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                {{ form.password }}
+            </div>
+            {% if form.username.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ form.username.errors.0 }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        const alertList = document.querySelectorAll('.alert')
+        const alerts = [...alertList].map(element => new bootstrap.Alert(element))
+
+    </script>
+
+{% endblock %}

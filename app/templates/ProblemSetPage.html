@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="container" style="margin-top:20px">
+        <div class="row">
+
+            <div class="col-sm-3 position-relative" style="">
+                <form class="d-flex" role="search" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q"
+                           value="{{ search_value }}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="card" style="margin-top:20px">
+            <div class="card-header">
+                Problem-list
+            </div>
+            <div class="card-body">
+                <div class="bd-example">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Index</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Link</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in queryset %}
+                            <tr>
+                                {#                                <th>{{ forloop.counter }}</th>#}
+                                <th>{{ item.id }}</th>
+                                <td>{{ item.index }}</td>
+                                <td>{{ item.title }}</td>
+                                <td>
+                                    <a href="{{ item.url }}" target="_blank">{{ item.url }}</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary btn-sm"
+                                       href="http://localhost:8000/ProblemManagement/add?title={{ item.title|urlencode }}&link={{ item.url|urlencode }}">
+{#                                         href="http://localhost:8000/ProblemManagement/add">#}
+                                        Add to Favor</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {#                        {{ page_string }}#}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example" style="margin-left: 20px">
+                <ul class="pagination justify-content-end" style="margin-right: 30px">
+                    {#                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>#}
+                    {#                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>#}
+                    {#                    <li class="page-item"><a class="page-link" href="?page=2">2</a></li>#}
+                    {#                    <li class="page-item"><a class="page-link" href="?page=3">3</a></li>#}
+                    {#                    <li class="page-item"><a class="page-link" href="#">Next</a></li>#}
+                    {{ page_index_string }}
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

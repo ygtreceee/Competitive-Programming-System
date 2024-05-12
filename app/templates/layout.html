@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-5.3.3/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-6.5.2-web/css/fontawesome.css' %}">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand" href="/index">ProblemSet System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/index">Contest</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ProblemSet">ProblemSet</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ProblemManagement/list">Lib</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills">
+                {% if request.session.info is None %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    {% else %}<!-- Example single danger button -->
+                    <div class="btn-group" style="margin-right:20px">
+                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            {{ request.session.info.username }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="http://localhost:8000/{{ request.session.info.id }}/profile">Profile</a></li>
+                            {#                            <li><a class="dropdown-item" href="#">Another action</a></li>#}
+                            {#                            <li><a class="dropdown-item" href="#">Something else here</a></li>#}
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div>
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script type="text/javascript"></script>
+{% block js %}
+{% endblock %}
+<script src="{% static 'plugins/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

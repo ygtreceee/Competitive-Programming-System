@@ -28,9 +28,15 @@ urlpatterns = [
     path('layout', views.layoutPage),
 
     path('index', views.index),
+    path('mylist', views.mylist),
 
     path('login', views.loginPage),
     path('logout', views.logoutPage),
+
+    path('attend/<int:id>/<str:type>', views.attend),
+    path('attendDelete/<int:id>/<str:type>', views.attendDelete),
+
+
     path('register', views.registerPage),
     path('<int:nid>/profile', views.profilePage),
 

@@ -34,7 +34,16 @@
                                         <td>{{ item.start_time }}</td>
                                         <td>{{ item.length }}</td>
                                         <td>
-                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join now!</a>
+
+                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join
+                                                now!</a>
+                                            <a href="/attend/{{ item.id }}/1">
+                                                <button type="button" class="btn btn-sm btn-outline-success"
+                                                        style="margin-left: 10px" onclick="showSuccessMessage()">
+                                                    Attend
+                                                </button>
+                                            </a>
+
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -53,7 +62,8 @@
                     </h2>
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
                          aria-labelledby="panelsStayOpen-headingTwo">
-                        <div class="accordion-body"><table class="table">
+                        <div class="accordion-body">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -69,7 +79,14 @@
                                         <td>{{ item.name }}</td>
                                         <td>{{ item.start_time }}</td>
                                         <td>
-                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join now!</a>
+                                            <a href="{{ item.url }}" class="link-info" style="text-decoration: none">Join
+                                                now!</a>
+                                            <a href="/attend/{{ item.id }}/2">
+                                                <button type="button" class="btn btn-sm btn-outline-success"
+                                                        style="margin-left: 10px" onclick="showSuccessMessage()">
+                                                    Attend
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -88,9 +105,11 @@
                         <h6 class="card-title" style="">Name</h6>
                         <div class="card-subtitle mb-2 text-muted">{{ cf_queryset.first.name }}</div>
                         <h6 class="card-title" style="text-align: left; margin-top: 10px">Start</h6>
-                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.start_time}}</div>
+                        <div class="card-text"
+                             style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.start_time }}</div>
                         <h6 class="card-title" style="text-align: left; margin-top: 10px">Length</h6>
-                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.length }}</div>
+                        <div class="card-text"
+                             style="margin-top: 10px; color: #5c636a">{{ cf_queryset.first.length }}</div>
                     </div>
                     <div class="card-footer bg-transparent border-success">
                         <a href="{{ cf_queryset.first.url }}" class="card-link">Register now »</a>
@@ -102,7 +121,8 @@
                         <h6 class="card-title" style="">Name</h6>
                         <div class="card-subtitle mb-2 text-muted">{{ atc_queryset.first.name }}</div>
                         <h6 class="card-title" style="text-align: left; margin-top: 10px">Start</h6>
-                        <div class="card-text" style="margin-top: 10px; color: #5c636a">{{ atc_queryset.first.start_time}}</div>
+                        <div class="card-text"
+                             style="margin-top: 10px; color: #5c636a">{{ atc_queryset.first.start_time }}</div>
                     </div>
                     <div class="card-footer bg-transparent border-success">
                         <a href="{{ atc_queryset.first.url }}" class="card-link">Register now »</a>
@@ -111,6 +131,31 @@
 
             </div>
         </div>
+
+
+    </div>
     </div>
 
+
+
+
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        function showSuccessMessage() {
+            alert("Successful!");
+        }
+
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+        if (toastTrigger) {
+            toastTrigger.addEventListener('click', () => {
+                const toast = new bootstrap.Toast(toastLiveExample)
+                toast.show()
+            })
+        }
+
+    </script>
 {% endblock %}

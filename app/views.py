@@ -8,8 +8,16 @@ from app.utils.form import ProblemForm, UserForm, LoginForm
 
 
 def index(request):
-    cf_queryset = models.CodeforcesContestInfo.objects.all()
-    atc_queryset = models.AtcoderContestInfo.objects.all()
+    info = request.session.get('info')
+    if info is None:
+        cf_queryset = models.CodeforcesContestInfo.objects.all()
+        atc_queryset = models.AtcoderContestInfo.objects.all()
+    else:
+        dataUser = models.ContestUser.objects.filter(user_id=info['id']).values('contest_id')
+        codeforcesUser = models.CodeforcesUser.objects.filter(user_id=info['id']).values('contest_id')
+        cf_queryset = models.CodeforcesContestInfo.objects.exclude(id__in=codeforcesUser)
+        atc_queryset = models.AtcoderContestInfo.objects.exclude(id__in=dataUser)
+
     context = {
         'title': 'Home',
         'cf_queryset': cf_queryset,
@@ -17,6 +25,52 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def mylist(request):
+    info = request.session.get('info')
+    if info is None:
+        cf_queryset = []
+        atc_queryset = []
+    else:
+        dataUser = models.ContestUser.objects.filter(user_id=info['id']).values('contest_id')
+        codeforcesUser = models.CodeforcesUser.objects.filter(user_id=info['id']).values('contest_id')
+        cf_queryset = models.CodeforcesContestInfo.objects.filter(id__in=codeforcesUser)
+        atc_queryset = models.AtcoderContestInfo.objects.filter(id__in=dataUser)
+
+    context = {
+        'title': 'Home',
+        'cf_queryset': cf_queryset,
+        'atc_queryset': atc_queryset,
+    }
+    return render(request, 'myindex.html', context)
+
+def attend(request, id,type):
+    info = request.session.get('info')
+    if type == '2':
+        contestUser = models.ContestUser()
+        contestUser.contest_id=id
+        contestUser.user_id=info['id']
+        contestUser.save()
+    else:
+        print(type)
+        codeforcesUser = models.CodeforcesUser()
+        codeforcesUser.contest_id=id
+        codeforcesUser.user_id=info['id']
+        codeforcesUser.save()  
+    context = {
+        'title': 'SUCCESS'
+    }
+    return redirect("http://127.0.0.1:8000/index")
+
+def attendDelete(request, id,type):
+    info = request.session.get('info')
+    if type == '2':
+        models.ContestUser.objects.filter(user_id=info['id'],contest_id=id).delete()
+    else:
+        models.CodeforcesUser.objects.filter(user_id=info['id'],contest_id=id).delete()
+    context = {
+        'title': 'SUCCESS'
+    }
+    return redirect("http://127.0.0.1:8000/mylist")
 
 def Problem_list(request):
     if request.method == 'GET':
@@ -41,7 +95,6 @@ def Problem_list(request):
             return redirect('http://localhost:8000/ProblemManagement/list')
         else:
             render(request, 'ProblemManagement.html', {'form': form})
-
 
 def Problem_add(request):
     if request.method == 'GET':

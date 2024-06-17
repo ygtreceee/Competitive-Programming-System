@@ -50,3 +50,15 @@ class AtcoderContestInfo(models.Model):
     name = models.CharField(verbose_name="name", max_length=50)
     start_time = models.CharField(verbose_name="start_time", max_length=50)
     url = models.CharField(verbose_name="url", max_length=50)
+
+
+class ContestUser(models.Model):
+    contest_id = models.IntegerField(verbose_name="contest_id")
+    user_id = models.IntegerField(verbose_name="user_id")
+    create_time = models.DateTimeField(verbose_name="create_time", auto_now_add=True)
+
+
+class CodeforcesUser(models.Model):
+    contest_id = models.IntegerField(verbose_name="code_id")
+    user_id = models.IntegerField(verbose_name="user_id")
+    create_time = models.DateTimeField(verbose_name="create_time", auto_now_add=True)

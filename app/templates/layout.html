@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/ProblemManagement/list">Lib</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mylist">My Contest</a>
+                </li>
             </ul>
             <ul class="nav nav-pills">
                 {% if request.session.info is None %}
@@ -71,8 +74,8 @@
 
 <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <script type="text/javascript"></script>
+<script src="{% static 'plugins/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
 {% block js %}
 {% endblock %}
-<script src="{% static 'plugins/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

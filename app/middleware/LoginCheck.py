@@ -9,7 +9,7 @@ class AuthMiddleware(MiddlewareMixin):
         path = request.path_info
         # print(path)
         # print(info_dict)
-        if path in ['/login', '/index', '/register', '/ProblemSet'] or info_dict is not None:
+        if path in ['/login', '/index', '/register', '/ProblemSet', '/mylist'] or info_dict is not None:
             return
         else:
             return redirect('/login')

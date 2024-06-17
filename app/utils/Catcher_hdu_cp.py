@@ -121,7 +121,7 @@ if __name__ == '__main__':
         host='localhost',  # 数据库主机名
         user='root',  # 用户名
         password='12345678',  # 密码
-        database='OJSystem'  # 数据库名称
+        database='ProblemSetSystem'  # 数据库名称
     )
     cursor = connection.cursor()
     # conn.commit()

@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'OJSystem',  # dbname
+        'NAME': 'ProblemSetSystem',  # dbname
         'USER': 'root',
         'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
